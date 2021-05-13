@@ -3,7 +3,7 @@ unit libcurl;
 {$mode objfpc}
 {$MACRO on}
 {$H+}
-{$DEFINE CURL_STATIC} // СТАТИЧЕСКАЯ КОМПАНОВКА 
+{$DEFINE CURL_NSTATIC} // СТАТИЧЕСКАЯ КОМПАНОВКА
 
 interface
 
@@ -41,14 +41,14 @@ uses
 
   // УПРАВЛЕНИЕ БИБЛИОТЕКОЙ LIBCURL
   procedure curl_global_cleanup     (); extdecl; external LIB_CURL;                                                                              // OK! Деинициализация LibCURL.
-  function  curl_global_init        (const Flags: TCURLGeneralOption): TCURLCode; cdecl; external LIB_CURL;                                      // OK! Инициализация   LibCURL.
-  function  curl_global_init_mem    (const Flags: TCURLGeneralOption;                                                                            //   ! Инициализация   LibCURL с обратными вызовами памяти.
+  function  curl_global_init        (const Flags: TCURLGlobalOption): TCURLCode; cdecl; external LIB_CURL;                                      // OK! Инициализация   LibCURL.
+  function  curl_global_init_mem    (const Flags: TCURLGlobalOption;                                                                            //   ! Инициализация   LibCURL с обратными вызовами памяти.
                                      M: TCURL_Malloc_CallBack;
                                      F: TCURL_Free_CallBack;
                                      R: TCURL_Realloc_CallBack;
                                      S: TCURL_StrDup_CallBack;
                                      C: TCURL_Calloc_CallBack): TCURLCode; extdecl; external LIB_CURL;
-  function curl_global_sslset       (ID   : TCURLSslBack; Name : PChar; out Avail): TCURLSslSet; extdecl; external LIB_CURL;                     // OK! Установка серверной части SSL для использования с LibCURL.
+  function curl_global_sslset       (ID   : TCURLSslBackEnd; Name : PChar; out Avail): TCURLSSLSet; extdecl; external LIB_CURL;                     // OK! Установка серверной части SSL для использования с LibCURL.
   function curl_version_info        (Age : TCURLVersion): TCURLVersionInfoData; extdecl; external LIB_CURL;
 
   // ПРОСТОЕ СОЕДИНЕНИЕ
@@ -163,14 +163,14 @@ var
   curl_easy_unescape      : function (Handle      : PCURL; Url : PChar; InLen: Integer; OutLen: PInteger): PChar; extdecl;           // OK! Декодирует строку URL.
   curl_easy_unkeep        : function (Handle      : PCURL): TCURLCode; extdecl;                                                      // OK! Выполняет проверку состояния соединения.
 {}curl_global_cleanup     : procedure(); extdecl;                                                                                    // OK! Деинициализация LibCURL.
-  curl_global_init        : function (const Flags : TCURLGeneralOption): TCURLCode; extdecl;                                         // OK! Инициализация LibCURL.
-  curl_global_init_mem    : function (const Flags : TCURLGeneralOption;                                                              // NO! Инициализация LibCURL с обратными вызовами памяти.
+  curl_global_init        : function (const Flags : TCURLGlobalOption): TCURLCode; extdecl;                                         // OK! Инициализация LibCURL.
+  curl_global_init_mem    : function (const Flags : TCURLGlobalOption;                                                              // NO! Инициализация LibCURL с обратными вызовами памяти.
                                       M           : TCURL_Malloc_CallBack;
                                       F           : TCurl_Free_CallBack;
                                       R           : TCURL_Realloc_CallBack;
                                       S           : TCURL_StrDup_CallBack;
                                       C           : TCURL_Calloc_CallBack): TCURLCode; extdecl;
-  curl_global_sslset      : function (ID          : TCURLSslBack; Name : PChar; Out Avail): TCURLSslSet; extdecl;                      // OK! Установка серверной части SSL для использования с LibCURL.
+  curl_global_sslset      : function (ID          : TCURLSSLBackEnd; Name : PChar; Out Avail): TCURLSSLSet; extdecl;                      // OK! Установка серверной части SSL для использования с LibCURL.
   curl_mime_addpart       : function (Mime        : PCURLMime): PCURLMimePart; extdecl;                                                //
   curl_mime_data          : function (Part        : PCURLMimePart; Const Data : PChar; Const DataSize : TSize): TCURLCode; extdecl;    //
   curl_mime_data_cb       : function (Part        : PCURLMimePart;                                                                     //
