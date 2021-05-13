@@ -3,7 +3,7 @@ unit libcurl;
 {$mode objfpc}
 {$MACRO on}
 {$H+}
-{$DEFINE CURL_NO_STATIC} // СТАТИЧЕСКАЯ КОМПАНОВКА 
+{$DEFINE CURL_STATIC} // СТАТИЧЕСКАЯ КОМПАНОВКА 
 
 interface
 
