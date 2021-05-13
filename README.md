@@ -1,1 +1,1 @@
-# LibCURL FOR Lazarus
+# LibCURL for Lazarus
