@@ -275,8 +275,9 @@ var
 implementation
 
 {$IFNDEF CURL_STATIC}
-procedure CURLibInit;
+function CURLibInit;
 begin
+  Result:= false;
   LibHandle:= LoadLibrary(LIB_CURL);
   if LibHandle <> NilHandle then
   begin
@@ -348,13 +349,15 @@ begin
     Pointer(curl_url_set            ):= GetProcedureAddress(LibHandle, 'curl_url_set'            );
     Pointer(curl_version            ):= GetProcedureAddress(LibHandle, 'curl_version'            );
     Pointer(curl_version_info       ):= GetProcedureAddress(LibHandle, 'curl_version_info'       );
-  end;
+    Result:= true;
+  end
+  else Result:= false;
 end;
 {$ENDIF}
 
 initialization
   {$IFNDEF CURL_STATIC}
-    CURLibInit;
+    if not(CURLibInit) then Halt(1);
   {$ENDIF}
 finalization
   {$IFNDEF CURL_STATIC}
