@@ -757,6 +757,8 @@ PTime         = ^TTime;
 TCURL         = Pointer;
 PCURL         = ^TCURL;
 
+TCURLHandle   = ^TCURL;
+
 TCURLSH       = Pointer;
 PCURLSH       = ^TCURLSH;
 
