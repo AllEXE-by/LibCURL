@@ -752,18 +752,6 @@ TCURLMSockAct = (
   CURL_CSELECT_ALL = 3,
   CURL_CSELECT_ERR = 4);
 
-TCURL_Malloc_CallBack   = procedure(Size : TSize); extdecl;
-TCURL_Realloc_CallBack  = procedure(Ptr : Pointer; Size : TSize); extdecl;
-TCURL_StrDup_CallBack   = function (Str : PChar): PChar; extdecl;
-TCURL_Calloc_CallBack   = procedure(NMemb : TSize; Size : TSize); extdecl;
-TCURL_Seek_CallBack     = function (Arg : Pointer; OffSet : Integer; Origin : Integer): Integer; extdecl;
-TCURL_Free_CallBack     = procedure(Ptr: Pointer); extdecl;
-TCURL_FormGet_CallBack  = function (UserP : Pointer; Buff : PChar; Len : TSize): PSize; extdecl;
-
-TCURL_Write_CallBack    = function (Buffer: PChar; Size: TSize; Count: TSize; Stream: Pointer): TSize; extdecl;
-TCURL_Read_CallBack     = function (Buffer: PChar; Size: TSize; Count: TSize; Stream: Pointer): TSize; extdecl;
-
-
 PTime         = ^TTime;
 
 TCURL         = Pointer;
@@ -813,6 +801,18 @@ PFdSet = ^FdSet;
     POff  = ^TOff;
     TCURLSocket   = TSocket;
 {$ENDIF}
+
+TCURL_Malloc_CallBack   = procedure(Size : TSize); extdecl;
+TCURL_Realloc_CallBack  = procedure(Ptr : Pointer; Size : TSize); extdecl;
+TCURL_StrDup_CallBack   = function (Str : PChar): PChar; extdecl;
+TCURL_Calloc_CallBack   = procedure(NMemb : TSize; Size : TSize); extdecl;
+TCURL_Seek_CallBack     = function (Arg : Pointer; OffSet : Integer; Origin : Integer): Integer; extdecl;
+TCURL_Free_CallBack     = procedure(Ptr: Pointer); extdecl;
+TCURL_FormGet_CallBack  = function (UserP : Pointer; Buff : PChar; Len : TSize): PSize; extdecl;
+
+TCURL_Write_CallBack    = function (Buffer: PChar; Size: TSize; Count: TSize; Stream: Pointer): TSize; extdecl;
+TCURL_Read_CallBack     = function (Buffer: PChar; Size: TSize; Count: TSize; Stream: Pointer): TSize; extdecl;
+
 
 TCURLWaitFd  = record
   Fd      : TCURLSocket;

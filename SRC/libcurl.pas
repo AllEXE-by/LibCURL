@@ -31,7 +31,7 @@ unit libcurl;
 {$mode objfpc}
 {$MACRO on}
 {$H+}
-{$DEFINE CURL_NSTATIC} // СТАТИЧЕСКАЯ КОМПАНОВКА
+{$DEFINE CURL_STATIC} // СТАТИЧЕСКАЯ КОМПАНОВКА
 
 interface
 
@@ -269,13 +269,13 @@ var
 
   LibHandle : THandle;
 
-  procedure CURLibInit;
+  function CURLibInit : Boolean;
 {$ENDIF}
 
 implementation
 
 {$IFNDEF CURL_STATIC}
-function CURLibInit;
+function CURLibInit : Boolean;
 begin
   Result:= false;
   LibHandle:= LoadLibrary(LIB_CURL);
